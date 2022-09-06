@@ -29,7 +29,7 @@ table th {
     position: fixed;
     text-decoration: none;
     width: 100px;
-    margin-top: 20px;
+    margin-top: 100px;
     border: 1px solid #ddd;
     border-radius: 5px;
     padding: 8px;
@@ -40,3 +40,24 @@ table th {
 #back:hover {
     color: black;
 }
+#form {
+    position: fixed;
+    margin-top: 25px;
+}
+#input {
+    padding: 8px;
+    border: 1px solid #ddd;
+    color: black;
+}
+#add {
+    background-color: orange;
+    padding: 8px;
+    color: white;
+    width: 100px;
+    border: 1px solid #ddd;
+    border-radius: 5px; 
+}
+#add:hover {
+    color: black;
+}
+

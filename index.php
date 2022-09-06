@@ -12,9 +12,10 @@
     $path = isset($_GET["path"]) ? './' . $_GET["path"] : './';
     $files_and_dirs = scandir($path);
 
-    print('<h2>Folder name: ' . str_replace('?path=', '', $_SERVER['REQUEST_URI']) . '</h2>');
+    print('<h2>Name of Directory: ' . str_replace('?path=', '', $_SERVER['REQUEST_URI']) . '</h2>');
 
-    // List all files and directories
+    //
+
     print('<table><th>Type</th><th>Name</th><th>Actions</th>');
     foreach ($files_and_dirs as $fnd) {
         if ($fnd != ".." and $fnd != ".") {
@@ -32,6 +33,8 @@
     }
     print("</table>");
 
+    //
+
     $que = explode('/', rtrim($_SERVER['QUERY_STRING'], '/'));
     array_pop($que);                                                             
 
@@ -40,7 +43,25 @@
     } else {
         print('<a id="back" href= "?path=/" >BACK</a>');
     }
-    print("</a>");
+
+    //
+
+    if (isset($_POST["folder_create"])) {
+        if ($_POST["folder_create"] != "") {
+            $created_dir = './' . $_GET["path"] . $_POST["folder_create"];
+            if (!is_dir($created_dir)) mkdir($created_dir, 0777, true);
+        }
+        $url = preg_replace("/(&?|\??)create_dir=(.+)?/", "", $_SERVER["REQUEST_URI"]);
+        header('Location: ' . urldecode($url));
+    }
+    
+    print('<form id="form" action="" method="post">
+    <input type="hidden" name="path" value=' . ($_GET['path']) . ' /> 
+    <input id="input" placeholder="Name of the new directory" type="text" id="folder_create" name="folder_create">
+    <button id="add" type="submit">ADD</button>
+    </form>');
+
+    
 
 
     ?>
