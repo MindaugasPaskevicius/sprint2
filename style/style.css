@@ -1,6 +1,9 @@
 * {
     font-family: Arial, Helvetica, sans-serif;
 }
+body {
+    margin-bottom: 15px;
+}
 h2 {
     text-align: center;
     margin-top: 50px;
@@ -26,10 +29,10 @@ table th {
     color: white;
 }
 #back {
-    position: fixed;
+    position: absolute;
     text-decoration: none;
     width: 100px;
-    margin-top: 100px;
+    margin-top: 25px;
     border: 1px solid #ddd;
     border-radius: 5px;
     padding: 8px;
@@ -41,7 +44,7 @@ table th {
     color: black;
 }
 #form {
-    position: fixed;
+    position: inherit;
     margin-top: 25px;
 }
 #input {
@@ -58,6 +61,24 @@ table th {
     border-radius: 5px; 
 }
 #add:hover {
+    color: black;
+}
+#input1 {
+    position: inherit;
+    padding: 5px;
+    border: 1px solid #ddd;
+    color: black;
+    margin-top: 25px;
+}
+#delete {
+    background-color: orange;
+    padding: 3px;
+    color: white;
+    width: 80px;
+    border: 1px solid #ddd;
+    border-radius: 5px; 
+}
+#delete:hover {
     color: black;
 }
 
