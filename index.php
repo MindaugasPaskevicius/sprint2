@@ -31,7 +31,18 @@
         }
     }
     print("</table>");
-    print ("<button>BACK</button>");
+
+    $que = explode('/', rtrim($_SERVER['QUERY_STRING'], '/'));
+    array_pop($que);                                                             
+
+    if (count($que) != 0) {
+        print('<a id="back" href= ' . '?' . implode('/', $que) . ' >BACK</a>');
+    } else {
+        print('<a id="back" href= "?path=/" >BACK</a>');
+    }
+    print("</a>");
+
+
     ?>
 </body>
 

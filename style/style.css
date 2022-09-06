@@ -25,7 +25,9 @@ table th {
     background-color:orange;
     color: white;
 }
-button {
+#back {
+    position: fixed;
+    text-decoration: none;
     width: 100px;
     margin-top: 20px;
     border: 1px solid #ddd;
@@ -33,7 +35,8 @@ button {
     padding: 8px;
     background-color: orange;
     color: white;
+    text-align: center;
 }
-button:hover {
+#back:hover {
     color: black;
 }
