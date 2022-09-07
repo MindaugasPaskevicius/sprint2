@@ -4,7 +4,7 @@
 <head>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
     <link rel="stylesheet" href="style/style.css">
-    <title>File System Browser</title>
+    <title>Praktinė užduotis</title>
 </head>
 
 <body class="container">
@@ -14,6 +14,38 @@
     $files_and_dirs = scandir($path);
 
     print('<h2>Name of Directory: ' . str_replace('?path=', '', $_SERVER['REQUEST_URI']) . '</h2>');
+
+    //Delete
+
+    if (isset($_POST['delete'])) {
+        $file_del = './' . $_GET["path"] . $_POST['delete'];
+        $file_del1 = str_replace("&nbsp;", " ", htmlentities($file_del,  'utf-8'));
+        if ($file_del1 != "." && $file_del1 != ".." && is_file($file_del1)) {
+            unlink($file_del1);
+        }
+    }
+
+    //Downloud
+    
+    if (isset($_POST['download'])) {
+        $file = './' . $_GET["path"] . $_POST['download'];                              // get File path
+        $file_path = str_replace("&nbsp;", " ", htmlentities($file, 'utf-8'));
+        // process download
+
+        ob_clean();
+        ob_start();
+        header('Content-Description: File Transfer');
+        header('Content-Type: application/pdf');
+        header('Content-Disposition: attachment; filename=' . basename($file_path));
+        header('Content-Transfer-Encoding: binary');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Pragma: public');
+        header('Content-Length: ' . filesize($file_path));
+        ob_end_flush();                                                                      // function requests the server to send its currently buffered output to the browser
+        readfile($file_path);
+        exit;
+    }
 
     //Uploud
 
@@ -44,17 +76,6 @@
     $path = './' . $_GET["path"];
     $fsndirs = scandir($path);
 
-    //Delete
-
-    if (isset($_POST['delete'])) {
-        $file_del = './' . $_GET["path"] . $_POST['delete'];
-        // print_r($file_del);
-        $file_del1 = str_replace("&nbsp;", " ", htmlentities($file_del, 'utf-8'));
-        if ($file_del1 != "." && $file_del1 != ".." && is_file($file_del1)) {
-            unlink($file_del1);
-        }
-    }
-
     //List directorys and files
 
     print('<table><th>Type</th><th>Name</th><th>Actions</th>');
@@ -68,7 +89,15 @@
                     : $_SERVER['REQUEST_URI'] . '?path=' . $fnd . '/') . '">' . $fnd . '</a>'
                 : $fnd)
                 . '</td>');
-            print('<td><button id="delete">Delete</button></td>');
+            print('<td><form style="display: inline-block" action="" method="post">
+            <input type="hidden" name="delete" value=' . str_replace(' ', '&nbsp;', $fnd) . '>  
+            <input type="submit" value="Delete">
+           </form>
+           <form style="display: inline-block" action="" method="post">
+                <input type="hidden" name="download" value=' . str_replace(' ', '&nbsp;', $fnd) . '>
+                <input type="submit" value="Download">
+               </form>
+           </td>');
             print('</tr>');
         }
     }

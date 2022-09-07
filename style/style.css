@@ -67,16 +67,17 @@ table th {
     position: inherit;
     padding: 5px;
     border: 1px solid #ddd;
-    color: black;
+    color: grey;
     margin-top: 25px;
 }
 #delete {
     background-color: orange;
-    padding: 3px;
+    padding: 5px;
     color: white;
     width: 80px;
     border: 1px solid #ddd;
-    border-radius: 5px; 
+    border-radius: 5px;
+    text-decoration: none;
 }
 #delete:hover {
     color: black;
