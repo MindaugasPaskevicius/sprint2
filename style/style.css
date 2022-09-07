@@ -72,9 +72,9 @@ table th {
 }
 #delete {
     background-color: orange;
-    padding: 5px;
+    padding: 1px;
     color: white;
-    width: 80px;
+    width: 85px;
     border: 1px solid #ddd;
     border-radius: 5px;
     text-decoration: none;
@@ -82,4 +82,3 @@ table th {
 #delete:hover {
     color: black;
 }
-

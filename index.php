@@ -8,30 +8,28 @@
 </head>
 
 <body class="container">
+
     <?php
-
+    date_default_timezone_set("Europe/Vilnius");
     $path = isset($_GET["path"]) ? './' . $_GET["path"] : './';
-    $files_and_dirs = scandir($path);
-
-    print('<h2>Name of Directory: ' . str_replace('?path=', '', $_SERVER['REQUEST_URI']) . '</h2>');
+    $cwd = getcwd();
+    $fsndirs = scandir($path);
 
     //Delete
 
     if (isset($_POST['delete'])) {
         $file_del = './' . $_GET["path"] . $_POST['delete'];
-        $file_del1 = str_replace("&nbsp;", " ", htmlentities($file_del,  'utf-8'));
+        $file_del1 = str_replace("&nbsp;", " ", htmlentities($file_del, false,  'utf-8'));
         if ($file_del1 != "." && $file_del1 != ".." && is_file($file_del1)) {
             unlink($file_del1);
         }
     }
 
     //Downloud
-    
-    if (isset($_POST['download'])) {
-        $file = './' . $_GET["path"] . $_POST['download'];                              // get File path
-        $file_path = str_replace("&nbsp;", " ", htmlentities($file, 'utf-8'));
-        // process download
 
+    if (isset($_POST['download'])) {
+        $file = './' . $_GET["path"] . $_POST['download'];
+        $file_path = str_replace("&nbsp;", " ", htmlentities($file, false, 'utf-8'));
         ob_clean();
         ob_start();
         header('Content-Description: File Transfer');
@@ -42,7 +40,7 @@
         header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
         header('Pragma: public');
         header('Content-Length: ' . filesize($file_path));
-        ob_end_flush();                                                                      // function requests the server to send its currently buffered output to the browser
+        ob_end_flush();
         readfile($file_path);
         exit;
     }
@@ -70,16 +68,11 @@
         header('Location:' . $_SERVER['REQUEST_URI']);
     }
 
+    //Directorys and files table
 
-    date_default_timezone_set("Europe/Vilnius");
-    $cwd = getcwd();
-    $path = './' . $_GET["path"];
-    $fsndirs = scandir($path);
-
-    //List directorys and files
-
+    print('<h2>Name of Directory: ' . str_replace('?path=', '', $_SERVER['REQUEST_URI']) . '</h2>');
     print('<table><th>Type</th><th>Name</th><th>Actions</th>');
-    foreach ($files_and_dirs as $fnd) {
+    foreach ($fsndirs as $fnd) {
         if ($fnd != ".." and $fnd != ".") {
             print('<tr>');
             print('<td>' . (is_dir($path . $fnd) ? "Directory" : "File") . '</td>');
@@ -91,11 +84,11 @@
                 . '</td>');
             print('<td><form style="display: inline-block" action="" method="post">
             <input type="hidden" name="delete" value=' . str_replace(' ', '&nbsp;', $fnd) . '>  
-            <input type="submit" value="Delete">
+            <input id="delete" type="submit" value="Delete">
            </form>
            <form style="display: inline-block" action="" method="post">
                 <input type="hidden" name="download" value=' . str_replace(' ', '&nbsp;', $fnd) . '>
-                <input type="submit" value="Download">
+                <input id="delete" type="submit" value="Download">
                </form>
            </td>');
             print('</tr>');
