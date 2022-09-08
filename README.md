@@ -30,7 +30,7 @@ You can also run this project by cloning the repository:
 - Type ``` git clone ```, and then paste the URL you copied earlier.
 
 ```bash
- $ git clone 
+ $ git clone https://github.com/MindaugasPaskevicius/sprint2.git
 ```
 - Press Enter to create your local clone.
 ___
