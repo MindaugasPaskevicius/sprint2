@@ -3,17 +3,17 @@
 
 Server file browser built with PHP.
 
- - :eyes: User can see the list of folders and files inside a directory <br>
- - :file_folder: User can create new folders or delete files <br>
- - :back: User can move from folder to folder <br>
- - :heavy_plus_sign: User can upload and download new files <br>
- - :white_check_mark: User can login and logout <br>
+ - User can see the list of folders and files inside a directory <br>
+ - User can create new folders or delete files <br>
+ - User can move from folder to folder <br>
+ - User can upload and download new files <br>
+ - User can login and logout <br>
 ___
 
 ## Installation
 
 
-In order to run the project you need to have AMPPS installed. When you have it just navigate to the main page of the repository and download the project (.zip file). Then add the project folder to your AMPPS projects directory ("../Ampps/www/"). Open the directory via localhost.<br>
+In order to run the project you need to have XAMPP installed. When you have it just navigate to the main page of the repository and download the project (.zip file). Then add the project folder to your XAMPP directory (C:\xampp\htdocs). Open the directory via localhost/"project fodler name"<br>
 
 ### Cloning a repository
 
@@ -30,7 +30,7 @@ You can also run this project by cloning the repository:
 - Type ``` git clone ```, and then paste the URL you copied earlier.
 
 ```bash
- $ git clone https://github.com/iltoeeai/File-System-Browser.git
+ $ git clone 
 ```
 - Press Enter to create your local clone.
 ___
@@ -38,7 +38,7 @@ ___
 ## Login details
 
 
-- :man: username: **tadas**
-- :unlock: password: **1234**
+- username: **mindaugas**
+- password: **1234**
 ___
 
