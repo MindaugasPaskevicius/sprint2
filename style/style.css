@@ -1,9 +1,10 @@
 * {
     font-family: Arial, Helvetica, sans-serif;
 }
-body {
-    margin-bottom: 15px;
+.container {
+    height: 120vh;
 }
+
 h2 {
     text-align: center;
     margin-top: 50px;
@@ -80,5 +81,22 @@ table th {
     text-decoration: none;
 }
 #delete:hover {
+    color: black;
+}
+#logout {
+    position: relative;
+    bottom: -120px;
+    left: 570px;
+}
+#logout a {
+    text-decoration: none;
+    background-color: orange;
+    padding: 15px;
+    color: white;
+    width: 100px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+#logout a:hover {
     color: black;
 }

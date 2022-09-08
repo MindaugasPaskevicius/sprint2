@@ -8,12 +8,28 @@
 </head>
 
 <body class="container">
-
     <?php
-    date_default_timezone_set("Europe/Vilnius");
+
+    require('login.php');
+
+
     $path = isset($_GET["path"]) ? './' . $_GET["path"] : './';
-    $cwd = getcwd();
+    //$cwd = getcwd();
     $fsndirs = scandir($path);
+
+    //Login form
+
+    if (!$_SESSION['valid'] == true) {
+        print('<div class="container mt-3 form-signin"><div class="container">');
+        print('<form class="form-signin" role="form" action="./index.php"  method="post">');           //$_SERVER['PHP_SELF'] returns the filename of the currently executing script
+        print('<h4 class="form-signin-heading">' . $msg . '</h4>');         // $msg = '';
+        print('<input type="text" class="form-control" name="username" placeholder="username = mindaugas" required autofocus></br>');
+        print('<input type="password" class="form-control" name="password" placeholder="password = 1234" required>');
+        print('<button class="btn btn-lg btn-primary mt-2 btn-block" type="submit" name="login">Login</button></form>');
+        print('</div>');
+        die();
+    }
+
 
     //Delete
 
@@ -64,7 +80,7 @@
         if ($file_size > 5000000) {
             print('Sorry, your file is too large');
         }
-        move_uploaded_file($file_tmp, './' . $_GET["path"] . $file_name);
+        move_uploaded_file($file_tmp, './' . $file_name);
         header('Location:' . $_SERVER['REQUEST_URI']);
     }
 
@@ -72,22 +88,22 @@
 
     print('<h2>Name of Directory: ' . str_replace('?path=', '', $_SERVER['REQUEST_URI']) . '</h2>');
     print('<table><th>Type</th><th>Name</th><th>Actions</th>');
-    foreach ($fsndirs as $fnd) {
-        if ($fnd != ".." and $fnd != ".") {
+    foreach ($fsndirs as $find) {
+        if ($find != ".." and $find != ".") {
             print('<tr>');
-            print('<td>' . (is_dir($path . $fnd) ? "Directory" : "File") . '</td>');
-            print('<td>' . (is_dir($path . $fnd)
+            print('<td>' . (is_dir($path . $find) ? "Directory" : "File") . '</td>');
+            print('<td>' . (is_dir($path . $find)
                 ? '<a href="' . (isset($_GET['path'])
-                    ? $_SERVER['REQUEST_URI'] . $fnd . '/'
-                    : $_SERVER['REQUEST_URI'] . '?path=' . $fnd . '/') . '">' . $fnd . '</a>'
-                : $fnd)
+                    ? $_SERVER['REQUEST_URI'] . $find . '/'
+                    : $_SERVER['REQUEST_URI'] . '?path=' . $find . '/') . '">' . $find . '</a>'
+                : $find)
                 . '</td>');
             print('<td><form style="display: inline-block" action="" method="post">
-            <input type="hidden" name="delete" value=' . str_replace(' ', '&nbsp;', $fnd) . '>  
+            <input type="hidden" name="delete" value=' . str_replace(' ', '&nbsp;', $find) . '>  
             <input id="delete" type="submit" value="Delete">
            </form>
            <form style="display: inline-block" action="" method="post">
-                <input type="hidden" name="download" value=' . str_replace(' ', '&nbsp;', $fnd) . '>
+                <input type="hidden" name="download" value=' . str_replace(' ', '&nbsp;', $find) . '>
                 <input id="delete" type="submit" value="Download">
                </form>
            </td>');
@@ -130,6 +146,8 @@
     } else {
         print('<a id="back" href= "?path=/" >Back</a>');
     }
+
+    print('<div id="logout"><a href = "index.php?action=logout"> Logout</div>');
 
     ?>
 </body>
