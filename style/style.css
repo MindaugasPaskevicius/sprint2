@@ -85,7 +85,7 @@ table th {
 }
 #logout {
     position: relative;
-    bottom: -120px;
+    bottom: -105px;
     left: 570px;
 }
 #logout a {
@@ -100,3 +100,4 @@ table th {
 #logout a:hover {
     color: black;
 }
+

@@ -3,7 +3,7 @@
 session_start();
 
 $path = isset($_GET["path"]) ? './' . $_GET["path"] : './';
-//$cwd = getcwd();
+$cwd = getcwd();
 $fsndirs = scandir($path);
 $msg = '';
 
@@ -45,9 +45,9 @@ if (isset($_POST["folder_create"])) {
     header('Location: ' . urldecode($url));
 }
 
-  //Delete logic
+//Delete logic
 
-  if (isset($_POST['delete'])) {
+if (isset($_POST['delete'])) {
     $file_del = './' . $_POST['delete'];
     $file_del1 = str_replace("&nbsp;", " ", htmlentities($file_del, false,  'utf-8'));
     if ($file_del1 != "." && $file_del1 != ".." && is_file($file_del1)) {
@@ -75,9 +75,9 @@ if (isset($_POST['download'])) {
     exit;
 }
 
- //Uploud logic
+//Uploud logic
 
- if (isset($_FILES['uploadFile'])) {
+if (isset($_FILES['uploadFile'])) {
     $file_name = $_FILES['uploadFile']['name'];
     $file_type = $_FILES['uploadFile']['type'];
     $file_tmp = $_FILES['uploadFile']['tmp_name'];
@@ -112,16 +112,15 @@ if (isset($_POST['download'])) {
 <body class="container">
     <?php
 
-
     //Login form
 
     if (!$_SESSION['valid'] == true) {
-        print('<div class="container mt-3 form-signin"><div class="container">');
-        print('<form class="form-signin" role="form" action="./index.php"  method="post">');           
-        print('<h4 class="form-signin-heading">' . $msg . '</h4>');
-        print('<input type="text" class="form-control" name="username" placeholder="username = mindaugas" required autofocus></br>');
-        print('<input type="password" class="form-control" name="password" placeholder="password = 1234" required>');
-        print('<button class="btn btn-lg btn-primary mt-2 btn-block" type="submit" name="login">Login</button></form>');
+        print('<div class="container mt-3 form-signin d-flex justify-content-center">');
+        print('<form class="card mt-5 col-4 bg-light justify-content-center" style="height: 400px;" role="form" action="./"  method="post">');
+        print('<h2 class="form-signin-heading">Login</h2>');
+        print('<input type="text" class="form-control text-center mt-3 ms-5" style="width: 320px;" name="username" placeholder="username = mindaugas" required autofocus></br>');
+        print('<input type="password" class="form-control text-center ms-5" style="width: 320px;" name="password" placeholder="password = 1234" required>');
+        print('<div class="d-flex justify-content-center"><button class=" btn btn-lg btn-warning mt-5 btn-block" style="width: 100px;" type="submit" name="login">Login</button></div></form>');
         print('</div>');
         die();
     }
