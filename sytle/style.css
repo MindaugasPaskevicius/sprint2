@@ -85,12 +85,12 @@ table th {
 }
 #logout {
     position: relative;
-    bottom: -105px;
+    bottom: -70px;
     left: 570px;
 }
 #logout a {
     text-decoration: none;
-    background-color: orange;
+    background-color:red;
     padding: 15px;
     color: white;
     width: 100px;
