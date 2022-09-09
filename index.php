@@ -22,7 +22,7 @@ if (
         $_SESSION['timeout'] = time();
         $_SESSION['username'] = 'mindaugas';
     } else {
-        $msg = 'Wrong password or username';
+        $msg = 'Wrong username or password';
     }
 }
 
@@ -112,13 +112,11 @@ if (isset($_FILES['uploadFile'])) {
 <body class="container">
     <?php
 
-    
-
     //Login form
 
-    if (!$_SESSION['valid'] == true) {
+    if (!$_SESSION['valid'] == true ) {
         print('<div class="container mt-3 form-signin d-flex justify-content-center">');
-        print('<form class="card mt-5 col-4 bg-light justify-content-center" style="height: 400px;" role="form" action="./"  method="post">');
+        print('<form class="card mt-5 col-4 bg-light justify-content-center" style="height: 400px;" action="./" method="post">');
         print('<h2 class="form-signin-heading">Login</h2>');
         print('<h4 class="form-signin-heading text-center text-danger">' . $msg . '</h4>');
         print('<div><input type="text" class="form-control text-center mt-3 ms-5" style="width: 320px;" name="username" placeholder="username = mindaugas" required autofocus></br>');
@@ -184,7 +182,7 @@ if (isset($_FILES['uploadFile'])) {
 
     //Logout button
 
-    print('<div id="logout"><a href = "index.php?action=logout"> Logout</div>');
+    print('<div id="logout"><a style="background-color:red;" href = "index.php?action=logout"> Logout</div>');
 
     ?>
 </body>
