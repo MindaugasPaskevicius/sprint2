@@ -3,7 +3,6 @@
 session_start();
 
 $path = isset($_GET["path"]) ? './' . $_GET["path"] : './';
-$cwd = getcwd();
 $fsndirs = scandir($path);
 $msg = '';
 
@@ -114,7 +113,7 @@ if (isset($_FILES['uploadFile'])) {
 
     //Login form
 
-    if (!$_SESSION['valid'] == true ) {
+    if (!isset($_SESSION['valid']) ) {
         print('<div class="container mt-3 form-signin d-flex justify-content-center">');
         print('<form class="card mt-5 col-4 bg-light justify-content-center" style="height: 400px;" action="./" method="post">');
         print('<h2 class="form-signin-heading">Login</h2>');
